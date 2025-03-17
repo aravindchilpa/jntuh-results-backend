@@ -21,8 +21,8 @@ A Node.js API that scrapes and serves JNTUH (Jawaharlal Nehru Technological Univ
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/yourusername/jntuh-result-portal.git
-cd jntuh-result-portal/backend
+git clone https://github.com/aravindchilpa/jntuh-results-backend.git
+cd jntuh-results-backend
 ```
 
 2. Install dependencies:
