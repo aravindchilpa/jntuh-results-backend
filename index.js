@@ -381,7 +381,7 @@ class ResultScraper {
         }
 
         if (this.results.details.rollNo) {
-            this.processSemesterResults(); // Add this line
+            this.processSemesterResults(); 
             return this.results;
         }
         return null;
@@ -389,7 +389,7 @@ class ResultScraper {
 
 }
 
-// Add this after the express imports
+
 const JWT_SECRET = process.env.JWT_SECRET;
 // Middleware to check API key
 const authenticateJWT = (req, res, next) => {
@@ -416,7 +416,7 @@ const authenticateJWT = (req, res, next) => {
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // Limit each IP to 100 requests per windowMs
+    max: 5, // Limit each IP to 05 requests per windowMs
     message: {
         error: 'Too many requests from this IP, please try again later.'
     }
@@ -430,7 +430,6 @@ app.use(cors());
 app.use(express.json());
 app.use(limiter);
 
-// Add this after other app.use() statements
 
 app.get('/', (req, res) => {
     const apiDocs = {
@@ -502,7 +501,6 @@ app.get('/', (req, res) => {
     res.json(apiDocs);
 });
 
-// ...existing code...
 
 app.get('/token', (req, res) => {
 const token = jwt.sign({ access: 'results' }, JWT_SECRET, { expiresIn: '1d' });
