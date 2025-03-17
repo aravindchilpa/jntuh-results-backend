@@ -430,6 +430,79 @@ app.use(cors());
 app.use(express.json());
 app.use(limiter);
 
+// Add this after other app.use() statements
+
+app.get('/', (req, res) => {
+    const apiDocs = {
+        name: "JNTUH Results API",
+        version: "1.0.0",
+        description: "API for fetching JNTUH examination results",
+        endpoints: {
+            "/": {
+                method: "GET",
+                description: "API documentation and available endpoints",
+                needsAuth: false
+            },
+            "/token": {
+                method: "GET",
+                description: "Get JWT authentication token",
+                needsAuth: false,
+                response: {
+                    token: "JWT token valid for 24 hours"
+                }
+            },
+            "/result": {
+                method: "GET",
+                description: "Fetch results for a roll number",
+                needsAuth: true,
+                parameters: {
+                    roll: "Student roll number (10 characters)"
+                },
+                headers: {
+                    Authorization: "Bearer <token>"
+                },
+                example: "/result?roll=20XX1A0XX0",
+                response: {
+                    details: {
+                        name: "Student Name",
+                        rollNo: "Roll Number",
+                        fatherName: "Father's Name",
+                        collegeCode: "College Code"
+                    },
+                    results: [
+                        {
+                            semesterCode: "1-1",
+                            subjects: [
+                                {
+                                    subjectCode: "Subject Code",
+                                    subjectName: "Subject Name",
+                                    subjectGrade: "Grade",
+                                    subjectCredits: "Credits"
+                                }
+                            ],
+                            sgpa: "8.50"
+                        }
+                    ]
+                }
+            }
+        },
+        rateLimit: {
+            window: "15 minutes",
+            maxRequests: 5
+        },
+        supportedPrograms: [
+            "B.Tech (Code: A)",
+            "B.Pharmacy (Code: R)",
+            "M.Tech (Code: D)",
+            "M.Pharmacy (Code: S)",
+            "MBA (Code: E)"
+        ]
+    };
+
+    res.json(apiDocs);
+});
+
+// ...existing code...
 
 app.get('/token', (req, res) => {
 const token = jwt.sign({ access: 'results' }, JWT_SECRET, { expiresIn: '1d' });
