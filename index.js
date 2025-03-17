@@ -381,7 +381,7 @@ class ResultScraper {
         }
 
         if (this.results.details.rollNo) {
-            this.processSemesterResults(); 
+            this.processSemesterResults();
             return this.results;
         }
         return null;
@@ -416,7 +416,7 @@ const authenticateJWT = (req, res, next) => {
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // Limit each IP to 05 requests per windowMs
+    max: 5, // Limit each IP to 5 requests per windowMs
     message: {
         error: 'Too many requests from this IP, please try again later.'
     }
