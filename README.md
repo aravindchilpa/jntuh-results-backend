@@ -73,7 +73,7 @@ Headers: Authorization: Bearer <your-token>
 ## Rate Limiting
 
 The API is limited to:
-- 5 requests per IP address
+- 10 requests per IP address
 - 15-minute window
 
 ## Response Format
